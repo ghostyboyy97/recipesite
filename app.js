@@ -33,12 +33,16 @@ function main(){
             let selector = getRandomInt(0, recipeSet.length);
 
             console.log(recipeSet[selector]);
-            let cookbook = Object.keys(recipeSet[selector])[0]
+            let cookbook = Object.keys(recipeSet[selector])[0];
+            let page = recipeSet[selector]["Page"];
+            if (page.includes("https")){
+                page = `<a href="${page}">Link</>`;
+            }
             $(".output_ctr").append(`
             <div class="recipe_row">
                 <div class="cookbook_title">${el}</div>
                 <div class="recipe_title">${recipeSet[selector][cookbook]}</div>
-                <div class="page">${recipeSet[selector]["Page"]}</div>
+                <div class="page">${page}</div>
             </div>`)
 
         });
@@ -72,6 +76,21 @@ function fetchAllCookbooks(){
             }
         });
     }
+    // https://docs.google.com/spreadsheets/d/1-u37LxRZv695y-V2i6l5opujV1AUmIf4X6HDBk_gkfg/edit?usp=sharing
+
+    $.ajax({
+        type: "GET",
+        url: "https://opensheet.elk.sh/1-u37LxRZv695y-V2i6l5opujV1AUmIf4X6HDBk_gkfg/1",
+        timeout: 10000,
+        success: function(data){
+            testData = data
+            pushToDatabase(data);
+        },
+        error: function(xhr, type){
+            console.log(xhr)
+            console.log(type)
+        }
+    });
 }
 
 function pushToDatabase(data){
