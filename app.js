@@ -51,7 +51,7 @@ function onWindowResize(){
 	var hs = window.innerHeight / 1080;
 	var ss = ws < hs ? ws : hs;
 	var fs = 100 * ss;
-    let phoneMod = navigator.userAgent.includes("iPhone") ? 3 : 1;
+    let phoneMod = (navigator.userAgent.includes("iPhone") || navigator.userAgent.includes("Android")) ? 3 : 1;
 	$("body").css("font-size", (fs*phoneMod) + "px");
 }
 
