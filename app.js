@@ -36,7 +36,7 @@ function main(){
             let cookbook = Object.keys(recipeSet[selector])[0];
             let page = recipeSet[selector]["Page"];
             if (page.includes("https")){
-                page = `<a href="${page}">Link</>`;
+                page = `<a target="_blank" href="${page}">Link</>`;
             }
             $(".output_ctr").append(`
             <div class="recipe_row">
